@@ -51,9 +51,9 @@ pipeline {
                             cd ${WORKSPACE}/python-jenkins-argocd-k8s/deploy
                             
                             # Update the image tag in your deployment file dynamically
-                            sed -i "s|image:.*|image: mgsanthoshkumar/python-todo-app:${BUILD_NUMBER}|g" deployment.yaml
+                            sed -i "s|image:.*|image: mgsanthoshkumar/python-todo-app:${BUILD_NUMBER}|g" deploy.yaml
                             
-                            git add deployment.yaml
+                            git add deploy.yaml
                             git commit -m "CI: update image tag to ${BUILD_NUMBER}"
                             git push https://${GITHUB_TOKEN}@github.com/mgsanthoshkumar/Jenkins-Zero-To-Hero.git HEAD:main
                         '''
