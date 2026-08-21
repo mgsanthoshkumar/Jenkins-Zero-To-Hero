@@ -10,7 +10,9 @@ pipeline {
             }
             steps {
                 sh 'mvn --version'
-                sh 'sleep 90' // Keeps the container active so you can catch it
+                // Runs a clean package build (assumes a standard Maven pom.xml is in your repo)
+                sh 'mvn clean package -DskipTests'
+                sh 'sleep 90' // Keeps the container active for inspection
             }
         }
         stage('Front-end') {
@@ -22,7 +24,10 @@ pipeline {
             }
             steps {
                 sh 'node --version'
-                sh 'sleep 90' // Keeps the container active so you can catch it
+                sh 'npm --version'
+                // Installs dependencies (assumes package.json is present)
+                sh 'npm install'
+                sh 'sleep 90' // Keeps the container active for inspection
             }
         }
     }
